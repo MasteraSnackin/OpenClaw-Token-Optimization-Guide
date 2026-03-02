@@ -1,192 +1,159 @@
-# 🚀 OpenClaw Token Optimization Guide: 15 Cost-Cutting Prompts
-
-Maximize your performance while minimizing your API spend. This guide contains 15 direct prompts and operational tips to help you cut OpenClaw costs by up to 60%.
+# OpenClaw Token Optimisation Guide: Beginner Edition
 
 ---
 
-## 📖 How to Use This Guide
+## How to use this guide
 
-> [!IMPORTANT]
-> **No config editing, no SSH, no code.** Simply copy-paste any prompt below directly to your OpenClaw agent. It will handle the rest.
-
----
-
-## 📑 Table of Contents
-
-1. [THE BIG TWO (Do These First)](#-the-big-two-do-these-first)
-2. [SYSTEM FILE OPTIMIZATION](#%EF%B8%8F-system-file-optimization)
-3. [MEMORY MANAGEMENT](#-memory-management)
-4. [OPERATIONAL EFFICIENCY](#-operational-efficiency)
-5. [SUMMARY: The Optimal Setup](#-summary-the-optimal-setup)
-6. [Master Prompt for Your Agent](#-master-prompt-for-your-agent)
+- You do not need to edit config files, use SSH, or write code.  
+- Copy any prompt block and paste it into your main OpenClaw agent.  
+- The agent should handle the changes itself.
 
 ---
 
-## 🔥 THE BIG TWO (Do These First)
+## Contents
 
-### TIP 1: Switch Your Heartbeat to a Cheaper Model
+1. [Start here: the two biggest wins](#start-here-the-two-biggest-wins)  
+2. [Make system files smaller](#make-system-files-smaller)  
+3. [Control how memory is used](#control-how-memory-is-used)  
+4. [Run your automations more efficiently](#run-your-automations-more-efficiently)  
+5. [Quick overview of the ideal setup](#quick-overview-of-the-ideal-setup)  
+6. [One master prompt you can paste](#one-master-prompt-you-can-paste)
 
-Your heartbeat fires every 30 minutes (48x/day). Most of the time, it just checks for updates. You don't need Opus for that.
+---
+
+## Start here: the two biggest wins
+
+### Tip 1: Use a cheaper model for heartbeats
+
+Your heartbeat runs roughly every 30 minutes and usually just checks for changes. You do not need the most expensive model for that.
 
 **Prompt:**
 
 ```text
 Switch my heartbeat model to Haiku.
-```
+Why this helps: Haiku is much cheaper per token than Opus (roughly an order of magnitude cheaper on typical API pricing), so moving heartbeats to Haiku can remove a large chunk of your daily cost.
 
-> [!NOTE]
-> **Why it works:** Haiku costs ~95% less than Opus per token. This single change can cut 30-40% of your total daily spend.
+Tip 2: Consider the Claude Max plan
+If you do a lot of proactive checks, email processing, or heavy workflows, your API bill can easily reach hundreds or thousands per month.
 
-### TIP 2: Get the Claude Max Plan
+Action:
+Go to Claude settings and check the Max plans (for example, Max 20x at around $200/month) to see if a flat monthly fee is cheaper than your current usage.
 
-If you use proactive checks, email, or heavy automations, you're likely spending $500–$2,000+/mo on API.
+You are trading “pay per token” for “fixed monthly cap”, which is usually better if your usage is high and predictable.
 
-**Action:** Go to [claude.ai/settings](https://claude.ai/settings) and upgrade to **Max ($200/mo)** for unlimited Opus.
+Make system files smaller
+Every message reloads your core files, so long, repetitive files cost you on every single interaction.
 
-> [!TIP]
-> **The Math:** $200 flat vs. $1,800+ on API = Instant massive savings.
+Tip 3: Ask the agent to audit your system files
+Prompt:
 
----
-
-## ⚙️ SYSTEM FILE OPTIMIZATION
-
-*Every message loads your core files. Every unnecessary line costs you every time.*
-
-### TIP 3: Audit System Files for Token Waste
-
-**Prompt:**
-
-```text
+text
 Audit every file that loads into your context each message (AGENTS.md, TOOLS.md, USER.md, MEMORY.md, HEARTBEAT.md, SOUL.md). For each one:
 1. What's in here that should be a skill instead of context?
 2. What's outdated or redundant?
 3. What's too verbose?
 Give me the current size, projected size, and estimated token savings.
-```
+Typical result: many people can shrink their system files by 40–60% with one pass like this.
 
-> [!TIP]
-> **Expected result:** Most users cut 40-60% of their system file size through this audit.
+Tip 4: Cut SOUL.md down to what really matters
+Prompt:
 
-### TIP 4: Trim SOUL.md to Personality-Critical Lines
-
-**Prompt:**
-
-```text
+text
 Trim my SOUL.md to personality-critical lines only. Remove anything that's default model behavior (e.g., "be helpful"). Keep only what makes you unique—specific rules or traits you wouldn't have without being told.
-```
+Aim for a short list of rules that genuinely change how the agent behaves, not general niceness or obvious instructions.
 
-### TIP 5: Keep HEARTBEAT.md Under 10 Lines
+Tip 5: Keep HEARTBEAT.md short
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Compress my HEARTBEAT.md to under 10 lines. Each line should be one clear action item. Remove all explanations—just the checklist.
-```
+This keeps every heartbeat cheap while still telling the agent exactly what to do.
 
----
+Control how memory is used
+Tip 6: Stop loading all memory by default
+Prompt:
 
-## 🧠 MEMORY MANAGEMENT
-
-### TIP 6: Only Load Memory Files on Demand
-
-**Prompt:**
-
-```text
+text
 Only load memory files on demand. Don't auto-load everything at startup. Pull what you need, when you need it.
-```
+This avoids paying to read big memory files when the current task does not need them.
 
-### TIP 7: Use memory_search Instead of Loading Full Files
+Tip 7: Use searches instead of loading full memory files
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Use memory_search instead of loading full memory files. When you need context, search for keywords instead of reading the entire file.
-```
+The agent should do targeted lookups instead of always pulling in entire histories.
 
-### TIP 8: Compress Old Memory Files
+Tip 8: Summarise old memory
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Compress my daily memory files. Summarize anything older than a week into 1-2 lines per day and archive the originals. Keep only the last 7 days at full detail.
-```
+You keep the important decisions while cutting the token cost of old logs.
 
-### TIP 9: Write Shorter Memory Entries
+Tip 9: Keep new memory entries short
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Write shorter memory entries going forward. One line per event, not a paragraph. Include only: what happened, the result, and any decision made.
-```
+Short, structured entries are easier to search and cheaper to reload later.
 
----
+Run your automations more efficiently
+Tip 10: Batch work in each heartbeat
+Prompt:
 
-## ⚡ OPERATIONAL EFFICIENCY
-
-### TIP 10: Batch Similar Tasks in One Heartbeat
-
-**Prompt:**
-
-```text
+text
 Batch similar tasks instead of handling them one at a time. Check email, calendar, and notifications in a single heartbeat cycle instead of spreading them across multiple.
-```
+One slightly larger heartbeat is cheaper than several separate ones.
 
-### TIP 11: Use Haiku Cron Jobs for Routine Tasks
+Tip 11: Use Haiku for routine cron jobs
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Use cron jobs on Haiku for routine tasks (daily summaries, notification checks) instead of handling them in the main Opus session.
-```
+Reserve expensive models for complex reasoning or higher‑risk actions.
 
-### TIP 12: Don't Re-Read Files Already Loaded
+Tip 12: Avoid re-reading the same files
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Don't read files you've already read this session. Track what you've loaded and skip re-reads unless I explicitly ask you to reload something.
-```
+If the file has not changed, re-reading it is pure waste.
 
-### TIP 13: Skip TOOLS.md When Tools Aren't Needed
+Tip 13: Only load TOOLS.md when needed
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Stop loading TOOLS.md if you're not using any tools this interaction. Only pull it in when you actually need tool-specific instructions.
-```
+Many interactions use no tools, so TOOLS.md can stay out of context by default.
 
-### TIP 14: Archive Old Cron Job Outputs
+Tip 14: Archive old cron outputs
+Prompt:
 
-**Prompt:**
-
-```text
+text
 Archive old cron job outputs instead of keeping them in the active workspace. Move anything older than 3 days to an archive folder.
-```
+This reduces clutter and stops large stale files from being pulled into context.
 
-### TIP 15: Match Response Length to Complexity
+Tip 15: Keep answers as short as the question
+Prompt:
 
-**Prompt:**
-
-```text
+text
 When I ask a simple question, give me a short answer. Don't write three paragraphs when one sentence works. Match your response length to the complexity of my request.
-```
+This cuts tokens and makes the assistant easier to work with.
 
----
+Quick overview of the ideal setup
+Plan: a Claude Max tier (for example, Max 20x at about $200/month) if it works out cheaper than your current monthly API usage.
 
-## 🎯 SUMMARY: The Optimal Setup
+Models: heartbeats and routine cron jobs on Haiku; only use Opus/Sonnet when you clearly need more reasoning power.
 
-- **Plan:** Claude Max ($200/mo flat) for unlimited Opus.
-- **Models:** Heartbeats and routine cron jobs running on **Haiku**.
-- **System Files:** Lean files (SOUL.md ~20 lines, HEARTBEAT.md ~10 lines).
-- **Memory:** Loaded on demand, compressed weekly, and one-line entries.
+System files: short SOUL.md (around 20 lines) and HEARTBEAT.md (around 10 checklist lines).
 
----
+Memory: loaded only when needed, compressed weekly, with one‑line entries for new events.
 
-## 🤖 Master Prompt for Your Agent
+One master prompt you can paste
+Paste this into your main OpenClaw agent. It tells the agent to optimise itself for lower token usage while staying correct.
 
-Paste this as a single message to your main OpenClaw agent and let it edit its own files and behaviours:
-
-```text
+text
 You are my cost-optimised OpenClaw operator. You must aggressively minimise tokens while preserving correctness. Apply all of the following changes yourself using your existing tools and file-editing abilities. If any step fails, report why and skip gracefully instead of retry-looping.
 
 ### Heartbeat and plans
@@ -244,8 +211,3 @@ Add this to your core operating rules:
 
 - Print a compact summary table of what you changed (file sizes before/after where available, heartbeat model, memory policy, batching rules).
 - Mention any steps you could not complete because of missing permissions, missing tools, or constraints in this environment.
-```
-
----
-
-*Generated with ❤️ by MasteraSnackin*
