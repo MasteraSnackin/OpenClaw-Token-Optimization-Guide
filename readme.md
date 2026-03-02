@@ -103,7 +103,6 @@ Compress my HEARTBEAT.md to under 10 lines. Each line should be one clear action
 
 ## Quick overview of the ideal setup
 
-- **Plan:** A Claude Max tier if your monthly usage exceeds the subscription cost.
 - **Models:** Use **Haiku** for heartbeats and routine crons; use **Opus/Sonnet** only for complex reasoning.
 - **System Files:** Keep **SOUL.md** (~20 lines) and **HEARTBEAT.md** (~10 lines) extremely lean.
 - **Memory:** Use search-on-demand, weekly compression, and one-line event logging.
