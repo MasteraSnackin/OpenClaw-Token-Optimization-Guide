@@ -31,11 +31,6 @@ Your heartbeat runs roughly every 30 minutes to check for tasks. You don't need 
 
 **Why this helps:** Haiku is significantly cheaper than Opus or Sonnet. Moving heartbeats to a lighter model can slash your baseline daily costs.
 
-### Tip 2: Consider the Claude Max plan
-If your API bills are consistently high due to heavy proactive workflows, a flat monthly fee might be better.
-
-**Action:** Check the Claude Max plans (e.g., Max 20x). Trading "pay-per-token" for a "fixed monthly cap" is often cheaper for high-volume users.
-
 ---
 
 ## Make system files smaller
