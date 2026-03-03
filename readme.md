@@ -73,13 +73,12 @@ After: Heartbeat uses Haiku, so most of the “idle monitoring” tokens are on 
 Every message reloads your core system files.
 If AGENTS.md, TOOLS.md, USER.md, MEMORY.md, HEARTBEAT.md and SOUL.md are large, you pay for that bloat on every interaction.
 
-Tip 2: Audit system files for bloat
+### Tip 2: Audit system files for bloat
 Goal: Delete what you do not need, and turn long explanations into short, focused instructions.
 
 Prompt to paste:
 
-text
-Audit every file that loads into your context each message (AGENTS.md, TOOLS.md, USER.md, MEMORY.md, HEARTBEAT.md, SOUL.md). For each one:
+```textAudit every file that loads into your context each message (AGENTS.md, TOOLS.md, USER.md, MEMORY.md, HEARTBEAT.md, SOUL.md). For each one:
 1. Identify anything that should be a skill or separate reference file instead of inline context.
 2. Remove outdated, duplicated, or unnecessary sections.
 3. Shorten overly verbose text into concise 1–2 line instructions.
@@ -95,14 +94,14 @@ Before:
 
 After:
 “When doing X, follow the X skill and summarise results in 2–3 sentences.”
+```
 
-Tip 3: Trim your personality (SOUL.md)
+### Tip 3: Trim your personality (SOUL.md)
 Goal: Keep only lines that genuinely change how the agent behaves.
 
 Prompt to paste:
 
-text
-Trim my SOUL.md to personality‑critical lines only.
+```textTrim my SOUL.md to personality‑critical lines only.
 Remove anything that is default LLM behaviour (for example “be helpful”, “be polite”).
 Keep only specific rules or traits that actually make this agent unique.
 Target: at most 20 short lines.
@@ -114,8 +113,11 @@ Examples of lines worth keeping:
 “Prefer concise answers, with bullets rather than long paragraphs.”
 
 “Summarise long outputs with 3 key bullets at the end.”
+```
 
-Tip 4: Compact your checklist (HEARTBEAT.md)
+
+
+### Tip 4: Compact your checklist (HEARTBEAT.md)
 Goal: HEARTBEAT.md should be a short to‑do list, not a wall of text.
 
 Prompt to paste:
