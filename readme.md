@@ -56,8 +56,7 @@ You do not need a heavy, expensive model for this routine “any work to do?” 
 
 **Prompt to paste:**
 
-```text
-Switch my heartbeat model to Claude Haiku.
+```textSwitch my heartbeat model to Claude Haiku.
 Use Haiku for heartbeats and other simple, routine checks.
 Keep Sonnet/Opus only for complex reasoning or long, tricky tasks.
 Explain what you changed.
@@ -66,8 +65,11 @@ Example effect:
 Before: Heartbeat uses Sonnet/Opus every 30 minutes.
 
 After: Heartbeat uses Haiku, so most of the “idle monitoring” tokens are on the cheapest model.
+```
 
-Make system files smaller
+
+
+## Make system files smaller
 Every message reloads your core system files.
 If AGENTS.md, TOOLS.md, USER.md, MEMORY.md, HEARTBEAT.md and SOUL.md are large, you pay for that bloat on every interaction.
 
