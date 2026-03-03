@@ -1,6 +1,6 @@
 # OpenClaw Token Optimisation Guide
 
-14 Easy Ways to Cut Your AI Costs
+15 Easy Ways to Cut Your AI Costs
 
 ---
 
@@ -37,12 +37,12 @@ If you only do a few things, start with these:
 
 ## How to Use This Guide
 
-- This guide is written for **beginners**.  
+- This guide is written for beginners.  
 - You do not need to write code, touch config files, or use SSH.  
-- Each tip has a **Prompt** block.  
+- Each tip has a Prompt block.  
 - To apply a tip, simply:
   1. Open your OpenClaw chat.
-  2. Copy the **entire** Prompt block (including all lines).
+  2. Copy the entire Prompt block (including all lines).
   3. Paste it into the chat and send.
   4. Let OpenClaw confirm what it changed.
 
@@ -83,6 +83,8 @@ You can use the tips in any order, but beginners should start with:
 
 - [The Big Plan Change](#the-big-plan-change)  
   - [TIP 15: Get the Claude Max Plan](#tip-15-get-the-claude-max-plan)  
+
+- [FAQ for Beginners](#faq-for-beginners)  
 
 - [Ideal Beginner‑Friendly Setup](#ideal-beginnerfriendly-setup)  
 
@@ -245,9 +247,65 @@ Old cron outputs clutter the workspace and may get scanned during operations, ad
 
 ---
 
+## The Big Plan Change
+
+### TIP 15: Get the Claude Max Plan
+
+If you’re using OpenClaw heavily via API, you can easily spend hundreds or thousands per month in usage fees. A flat‑fee Max plan can be much cheaper.
+
+**Action:**
+
+Go to `claude.ai/settings` and upgrade to **Max 20x** (`$200`/month).
+
+---
+
+## FAQ for Beginners
+
+### What is a heartbeat?
+
+A heartbeat is a scheduled check your OpenClaw agent runs automatically (for example every 15–30 minutes) to see if anything needs attention without you sending a message first.[web:34]  
+On each heartbeat, it reads `HEARTBEAT.md`, follows a short checklist (like “check email” or “look for urgent alerts”), and then either does nothing or takes action if it finds work.[web:37]
+
+---
+
+### What is a system file?
+
+A system file is a markdown file in your OpenClaw workspace that defines how your agent behaves, who you are, and what tools it can use.[web:32][web:35]  
+Common system files include:  
+- `SOUL.md` – the agent’s personality, boundaries, and tone.[web:32][web:35]  
+- `USER.md` – details about you (name, timezone, preferences).[web:32][web:35]  
+- `TOOLS.md` – instructions and definitions for tools the agent can call.[web:32]  
+- `HEARTBEAT.md` – the checklist the agent follows on each heartbeat.[web:32][web:34]  
+
+These files are often loaded into context every time the agent runs, which is why keeping them short saves tokens.[web:38]
+
+---
+
+### What is `memory_search`?
+
+`memory_search` is a built‑in OpenClaw tool that lets your agent search across your memory markdown files (like `MEMORY.md` and `memory/*.md`) using natural‑language queries.[web:33][web:39]  
+Instead of loading full files, it searches small chunks and returns only the most relevant snippets, which gives the agent the context it needs while using far fewer tokens.[web:33][web:39]
+
+---
+
+### Why do shorter files and answers save money?
+
+OpenClaw pays for both input tokens (what it reads) and output tokens (what it writes), so large system files and long replies cost more every time the agent runs.[web:8][web:26]  
+By trimming system files, using `memory_search`, and keeping answers concise, you reduce the number of tokens processed per run, which directly lowers your bill.[web:8][web:11]
+
+---
+
+### Do I need to edit files manually to use this guide?
+
+No. Every change in this guide can be triggered by copy‑pasting the provided prompts into your OpenClaw chat and letting the agent update files for you.[web:21]  
+Manual file editing is optional; beginners can rely entirely on the prompts until they are comfortable making direct edits.
+
+---
+
 ## Ideal Beginner‑Friendly Setup
 
-1. Run heartbeats and cron jobs on Haiku.  
-2. Keep `SOUL.md` and `HEARTBEAT.md` short and focused.  
-3. Load memory only when needed and use `memory_search`.  
-4. Keep responses and memories concise so fewer tokens are used each time.
+1. Use Claude Max if your monthly usage is high.  
+2. Run heartbeats and cron jobs on Haiku.  
+3. Keep `SOUL.md` and `HEARTBEAT.md` short and focused.  
+4. Load memory only when needed and use `memory_search`.  
+5. Keep responses and memories concise so fewer tokens are used each time.
